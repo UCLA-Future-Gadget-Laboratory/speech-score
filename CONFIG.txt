@@ -1,0 +1,25 @@
+// Here, we use '@' as an arbitrary identifier for lines with CONFIG variables
+// A lot of arbitrary formatting here, can refine later
+// Please modify as needed by JavaScript/Python -- we will use the same CONFIG file so please coordinate this
+
+// Python -- you can read lines starting with '@' and then use 
+// line.split('=') to store variables
+
+// JavaScript -- Idk how config files work with JS -- can you parse the file like Python or could we use special symbols? Yes, config file's being a bit hacky right now.
+
+// Length of input file in milliseconds
+// We could use different metrics to determine chunk size later on
+@INPUT_CHUNK_LENGTH = 5000
+
+// Store the video file in this directory
+@VIDEO_FILE_PATH = ""
+
+// Store the audio file in this directory
+@AUDIO_FILE_PATH = ""
+
+// Store the transcript file with results from Speech API
+@TRANSCRIPT_FILE_PATH = ""
+
+// Store the JSON file with results from NLP API
+// Fields: e.g. "transcript", "average_wpm", "sentiment_score"
+@JSON_FILE_PATH = ""
