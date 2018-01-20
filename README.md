@@ -4,3 +4,4 @@
 ### Dependencies
 #### Python dependencies
 * google-cloud-language
+* pydub
