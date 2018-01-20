@@ -1,0 +1,18 @@
+{
+	// Get input from browser, 
+	// save chunks locally, send chunks to server
+	"input": {
+		"INPUT_CHUNK_LENGTH": 5000,
+		"VIDEO_SAVE_PATH": "video.mp4",
+		"AUDIO_SAVE_PATH": "audio.webm"
+	},
+	// Server sends back json with results from input-processing
+	"intermediate": {
+		"JSON_SAVE_PATH": "results.json",
+	},
+	// This json stores final information (including final transcript)
+	"final": {
+		"FINAL_SAVE_PATH": "final_results.json"
+	}
+
+}
