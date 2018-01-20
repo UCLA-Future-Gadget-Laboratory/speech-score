@@ -1,3 +1,11 @@
 #downloadButton, #recording {
   display: none;
 }
+#video {
+	display: inline-block;
+	width: 600px;
+}
+#charts {
+	display: inline-block;
+	width: 400px;
+}
