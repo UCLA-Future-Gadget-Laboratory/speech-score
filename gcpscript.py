@@ -4,16 +4,24 @@ from google.cloud.language import enums
 from google.cloud.language import types
 
 # Instantiates a client
-client = language.LanguageServiceClient()
 
-# The text to analyze
-text = u'Hello, world!'
-document = types.Document(
-    content=text,
-    type=enums.Document.Type.PLAIN_TEXT)
+class CloudNaturalLanguage:
+	client = language.LanguageServiceClient()
 
-# Detects the sentiment of the text
-sentiment = client.analyze_sentiment(document=document).document_sentiment
+	def __init__(self, text):
+		self.text = text
 
-print('Text: {}'.format(text))
-print('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
+	def analyzeSentiment(self):
+		document = types.Document(
+    		content=self.text,
+    		type=enums.Document.Type.PLAIN_TEXT
+    	)
+
+		return self.client.analyze_sentiment(document=document).document_sentiment
+
+if __name__ == "__main__":
+	text = "sample text to be analyzed"
+	asdf = CloudNaturalLanguage(text)
+	sentiment = asdf.analyzeSentiment()
+	print('Text: {}'.format(text))
+	print('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
