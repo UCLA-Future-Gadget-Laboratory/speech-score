@@ -1,13 +1,10 @@
 let preview = document.getElementById("preview");
 let recording = document.getElementById("recording");
-let audioRecording = document.getElementById("audioRecording");
 let startButton = document.getElementById("startButton");
 let stopButton = document.getElementById("stopButton");
 let downloadButton = document.getElementById("downloadButton");
-let audioDownloadButton = document.getElementById("audioDownloadButton")
 let logElement = document.getElementById("log");
 
-let fullRecordingTimeMS = 30000;
 let recordingTimeMS = 5000;
 
 var stopNow = true;
