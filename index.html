@@ -6,17 +6,33 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1 id="bigOne"></h1>
-
-  <div id="video-container">
+  <div id="container">
     <video id="camera-stream" autoplay></video>
+
+    <div id="input" class="header">
+      <h2 style="margin:5px">Text</h2>
+      <input type="text" id="myInput" placeholder="Title...">
+      <span onclick="newElement()" class="addBtn">Enter</span>
+
+    </div>
+    <div id="input">
+      <ul id="myUL">
+      </ul>
+    </div>
+
   </div>
 
+
+
   <!-- Camera recording and screen mirroring -->
+  <script src="jquery-3.2.0.min.js"></script>
+
   <script src="script.js"></script>
 
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+  <script src="./text.js"></script>
+
   <script>
     // Initialize Firebase
     var config = {
