@@ -1,5 +1,5 @@
 import json
-# Imports the Google Cloud client library
+# Import the Google Cloud client library
 from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
@@ -10,6 +10,15 @@ class CloudNaturalLanguage:
 	def __init__(self):
 		pass
 
+	"""
+	Input: a string with the text to analyze for sentiment
+	Output: JSON file with the following format
+	{
+		"text": string,
+		"score": float,
+		"magnitude": float
+	}
+	"""
 	def analyzeSentiment(self, text):
 		document = types.Document(
     		content=text,
@@ -27,6 +36,6 @@ class CloudNaturalLanguage:
 
 if __name__ == "__main__":
 	text = "sample text to be analyzed"
-	asdf = CloudNaturalLanguage()
-	sentiment = asdf.analyzeSentiment(text)
+	cnl = CloudNaturalLanguage()
+	sentiment = cnl.analyzeSentiment(text)
 	print(sentiment)
