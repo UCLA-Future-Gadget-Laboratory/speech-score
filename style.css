@@ -1,3 +1,39 @@
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
 #downloadButton, #recording {
   display: none;
+}
+#startButton, #stopButton {
+  position: absolute;
+  bottom: 10vh;
+  left: 50%;
+  right: 50%;
+}
+#stopButton {
+  visibility: hidden;
+}
+video {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+}
+.fa-play-circle-o {
+  color: white;
+}
+.fa-stop-circle-o {
+  color: white;
+}
+.left {
+  float: left;
+  width: 133.33vh;
+  background: black;
+  text-align: left;
+  position: relative;
+}
+.right {
+  float: right;
+  width: 40%;
 }

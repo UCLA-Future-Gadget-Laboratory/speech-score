@@ -1,6 +1,7 @@
 API Key: 	AIzaSyAcFKaLSY-m6bpx3g7OBG9OMd-jEWoQZLo
 Key File:	/home/haoyu/Desktop/SBHacks2018/SBHacks-c18839cd7d0f.json
 
+export GOOGLE_APPLICATION_CREDENTIALS=/home/haoyu/Desktop/SBHacks2018/SBHacks-c18839cd7d0f.json
 
 curl -s -H "Content-Type: application/json" \
     -H "Authorization: Bearer ya29.c.ElpIBROMiuWMLZWnvAqNqc1k0l21LJOi_iS2pvv-UJHCMkNZW0U0eRXQpIqN_02Zs8Hlfqy5yG_CgCBZEcp9HHVKoO4qEvMBzs8g9eU1OGx_LP2zRAsjD-QWuMQ" \
