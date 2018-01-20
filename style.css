@@ -1,8 +1,3 @@
-html, body {
-  padding: 0;
-  margin: 0;
-}
-
-#camera-stream {
-  height: 100vh;
+#downloadButton, #recording {
+  display: none;
 }
