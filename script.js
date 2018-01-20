@@ -1,11 +1,14 @@
 let preview = document.getElementById("preview");
 let recording = document.getElementById("recording");
+let audioRecording = document.getElementById("audioRecording");
 let startButton = document.getElementById("startButton");
 let stopButton = document.getElementById("stopButton");
 let downloadButton = document.getElementById("downloadButton");
+let audioDownloadButton = document.getElementById("audioDownloadButton")
 let logElement = document.getElementById("log");
 
-let recordingTimeMS = 10000;
+let fullRecordingTimeMS = 30000;
+let recordingTimeMS = 5000;
 
 var stopNow = true;
 
@@ -49,11 +52,18 @@ function stop(stream) {
 startButton.addEventListener("click", function() {
   stopNow = false;
   beginRecording();
+  startButton.style.visibility = "hidden";
+  stopButton.style.visibility = "visible";
+  preview.style.visibility = "visible";
 }, false);
 
 stopButton.addEventListener("click", function() {
   stopNow = true;
   stop(preview.srcObject);
+  startButton.style.visibility = "visible";
+  stopButton.style.visibility = "hidden";
+  preview.style.visibility = "hidden";
+
 }, false);
 
 function beginRecording() {
@@ -80,66 +90,8 @@ function beginRecording() {
       downloadButton.download = "RecordedVideo.webm";
       downloadButton.click();
 
-      log("Successfully recorded " + recordedBlob.size + " bytes of " +
-          recordedBlob.type + " media.");
+      log("Successfully recorded " + recordedBlob.size + " bytes of " + recordedBlob.type + " media.");
     }).catch(log);
+
   }
 }
-
-// function onVideoFail(e) {
-//         console.log('webcam fail!', e);
-//       };
-//
-//     function hasGetUserMedia() {
-//       // Note: Opera is unprefixed.
-//       return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
-//                 navigator.mozGetUserMedia || navigator.msGetUserMedia);
-//     }
-//
-//     if (hasGetUserMedia()) {
-//       // Good to go!
-//     } else {
-//       alert('getUserMedia() is not supported in your browser');
-//     }
-//
-//     window.URL = window.URL || window.webkitURL;
-//     navigator.getUserMedia  = navigator.getUserMedia ||
-//                              navigator.webkitGetUserMedia ||
-//                               navigator.mozGetUserMedia ||
-//                                navigator.msGetUserMedia;
-//
-//     var video = document.querySelector('video');
-//     var streamRecorder;
-//     var webcamstream;
-//
-//     if (navigator.getUserMedia) {
-//       navigator.getUserMedia({audio: true, video: true}, function(stream) {
-//         video.src = window.URL.createObjectURL(stream);
-//         webcamstream = stream;
-//       streamrecorder = webcamstream.record();
-//       }, onVideoFail);
-//     } else {
-//         alert ('failed');
-//     }
-//
-// function startRecording() {
-//   console.log("recording");
-//     streamRecorder = webcamstream.record();
-//     setTimeout(stopRecording, 10000);
-// }
-// function stopRecording() {
-//   console.log("stoppped recording");
-//     streamRecorder.getRecordedData(postVideoToServer);
-// }
-// function postVideoToServer(videoblob) {
-//   console.log("uploaded to server");
-//
-//     var data = {};
-//     data.video = videoblob;
-//     data.metadata = 'test metadata';
-//     data.action = "upload_video";
-//     jQuery.post("uploadvideo.php", data, onUploadSuccess);
-// }
-// function onUploadSuccess() {
-//     alert ('video uploaded');
-// }
