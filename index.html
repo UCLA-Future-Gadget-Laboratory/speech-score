@@ -8,16 +8,30 @@
 
     <script src="https://use.fontawesome.com/bbae49e875.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.4.0/wavesurfer.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   </head>
   <body>
 
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="team.html">Team</a></li>
+    </ul>
+
     <div class="left">
-      <video id="preview" autoplay muted>
+      <h1>Speech Score</h1>
+      <p>Improve your speaking skills.</p>
+      <video id="preview" autoplay muted width=500 height=500>
       </video>
+
+    </div>
+    <h2>
       <i class="fa fa-play-circle-o fa-5x" aria-hidden="true" id="startButton"></i>
       <i class="fa fa-stop-circle-o fa-5x" aria-hidden="true" id="stopButton"></i>
-    </div>
+    </h2>
 
+
+    <a href="index.html"><i class="fa fa-podcast fa-3x" aria-hidden="true" id="logo"></i></a>
+<!--
     <div class="right">
       <div id="chart-container">
       </div>
@@ -30,7 +44,7 @@
        <div id="input">
          <ul id="myUL">
          </ul>
-      </div>
+      </div> -->
     </div>
 
     </div>
@@ -39,6 +53,7 @@
         <!-- Camera recording and screen mirroring -->
     <video id="recording"></video>
     <a id="downloadButton" class="button">Download</a>
+    <a id="audioDownloadButton" class="button">Download</a>
 
 
     <!-- Firebase -->
