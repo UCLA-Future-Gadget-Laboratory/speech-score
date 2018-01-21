@@ -1,21 +1,24 @@
 // makes something pop up if text equals certain value
-  var li = document.createElement("li");
-  var inputValue = document.getElementById("myInput").value;
-  var t = document.createTextNode(inputValue);
-  li.appendChild(t);
-  if (inputValue === '') {
-    alert("You must write something!");
-  } else if (inputValue.includes('fast')) {
-    appendNotification(true);
-    document.getElementById("myUL").appendChild(li);
-  } else if (inputValue.includes('slow')) {
-    appendNotification(false);
-    // document.getElementById("myUL").appendChild(li);
-  } else {
-    // document.getElementById("myUL").appendChild(li);
-  }
-  document.getElementById("myInput").value = "";
+var li = document.createElement("li");
+var inputValue = document.getElementById("myInput").value;
+var t = document.createTextNode(inputValue);
+li.appendChild(t);
+if (inputValue === '') {
+  alert("You must write something!");
+} else if (inputValue.includes('fast')) {
+      console.log('fast');
+
+  appendNotification(true);
+  document.getElementById("myUL").appendChild(li);
+} else if (inputValue.includes('slow')) {
+  console.log('slow');
+  appendNotification(false);
+  // document.getElementById("myUL").appendChild(li);
+} else {
+  // document.getElementById("myUL").appendChild(li);
 }
+document.getElementById("myInput").value = "";
+
 
 $('body').append('<div class="notification-wrapper" style="pointer-events: none; position: absolute;"></div>');
 

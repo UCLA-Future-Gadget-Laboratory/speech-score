@@ -3,7 +3,6 @@ html, body {
   margin: 0;
 }
 
-<<<<<<< HEAD
 #downloadButton, #recording {
   display: none;
 }
@@ -41,14 +40,11 @@ video {
 	display: inline-block;
 	position: fixed;
 }
-=======
+
+/* from example */
+
 #container {
 	margin: 0;
-}
-
-#camera-stream {
-	display: inline-block;
-	width:500px;
 }
 
 #input {
@@ -111,7 +107,7 @@ ul li:hover {
   color: white;
   text-align: center;
   position: fixed;
-  top: 0;
+  bottom: 0;
 }
 
 /* Clear floats after the header */
@@ -147,4 +143,3 @@ input {
   background-color: #bbb;
 }
 
->>>>>>> 2d34aa0cf666d8a4f818976fbb3a98788527a9f4
