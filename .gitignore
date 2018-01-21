@@ -1,2 +1,6 @@
 SBHacks-c18839cd7d0f.json
 AudioFile*
+node_modules/*
+__pycache__/*
+*.json
+*.log

@@ -17,29 +17,37 @@
     </div>
 
     <div class="right">
-
+      <div id="chart-container">
+      </div>
+      <div id="input" class="header">
+      <h2 style="margin:5px">Input text</h2>
+        <input type="text" id="myInput" placeholder="Title...">
+        <span onclick="newElement()" class="addBtn">Enter</span>
+ 
+       </div>
+       <div id="input">
+         <ul id="myUL">
+         </ul>
+      </div>
     </div>
 
+ 
+    </div>
+
+    <script src="jquery-3.2.0.min.js"></script>
+
+        <!-- Camera recording and screen mirroring -->
     <video id="recording"></video>
     <a id="downloadButton" class="button">Download</a>
 
+    <script src="js/script.js"></script>
+    <script src="js/text.js"></script>
 
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-storage.js"></script>
-    <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyDM9L1r4BwgTtw28iD3M2p1hVAkizblXnY",
-        authDomain: "speech-score-be574.firebaseapp.com",
-        databaseURL: "https://speech-score-be574.firebaseio.com",
-        projectId: "speech-score-be574",
-        storageBucket: "speech-score-be574.appspot.com",
-        messagingSenderId: "62579755631"
-      };
-      firebase.initializeApp(config);
-
-    </script>
+    <script src="js/init_firebase.js"></script>
+    <script src="js/words_per_min.js"></script>
 
     <!-- Camera recording and screen mirroring -->
     <script src="script.js"></script>
