@@ -17,8 +17,6 @@ var count = 0;
 //   }
 // }
 
-console.log('SOS HELP');
-
 //
 var stopNow = true;
 // var storage = firebase.storage();
@@ -109,10 +107,10 @@ function beginRecording() {
       downloadButton.click();
       count += 1;
 
-      $.ajax({
-         url: "localhost:5001/run-step",
-         method: "POST"
-      }); // jquery ajax
+      // $.ajax({
+      //    url: "localhost:5001/run-step",
+      //    method: "POST"
+      // }); // jquery ajax
 
       log("Successfully recorded " + recordedBlob.size + " bytes of " + recordedBlob.type + " media.");
     }).catch(log);
