@@ -62,7 +62,6 @@ function stop(stream) {
   stream.getTracks().forEach(track => track.stop());
 }
 
-
 startButton.addEventListener("click", function() {
   console.log("button was pressed");
   stopNow = false;
@@ -78,7 +77,6 @@ stopButton.addEventListener("click", function() {
   startButton.style.display = "inline";
   stopButton.style.display = "none";
   preview.style.visibility = "hidden";
-
 }, false);
 
 function beginRecording() {
@@ -109,10 +107,11 @@ function beginRecording() {
       downloadButton.click();
       count += 1;
 
-      // $.ajax({
-      //    url: "localhost:5001/run-step",
-      //    method: "POST"
-      // }); // jquery ajax
+      $.ajax({
+         url: "/run-step",
+         method: "GET",
+         success: "Successfully ajax"
+      }); // jquery ajax
 
       log("Successfully recorded " + recordedBlob.size + " bytes of " + recordedBlob.type + " media.");
     }).catch(log);
