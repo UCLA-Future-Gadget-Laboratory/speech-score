@@ -3,7 +3,6 @@ let recording = document.getElementById("recording");
 let startButton = document.getElementById("startButton");
 let stopButton = document.getElementById("stopButton");
 let downloadButton = document.getElementById("downloadButton");
-let downloadAudioButton = document.getElementById("downloadAudioButton");
 let logElement = document.getElementById("log");
 
 let recordingTimeMS = 5000;
@@ -94,9 +93,9 @@ function beginRecording() {
     .then (recordedChunks => {
       let recordedBlob = new Blob(recordedChunks, { type: "video/webm" });
 
-      recordingRef.put(recordedBlob).then(function(snapshot) {
-        console.log('Uploaded a blob!');
-      });
+      // recordingRef.put(recordedBlob).then(function(snapshot) {
+      //   console.log('Uploaded a blob!');
+      // });
 
       //download the recording as a webm
       recording.src = URL.createObjectURL(recordedBlob);
