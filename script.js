@@ -3,11 +3,24 @@ let recording = document.getElementById("recording");
 let startButton = document.getElementById("startButton");
 let stopButton = document.getElementById("stopButton");
 let downloadButton = document.getElementById("downloadButton");
+let downloadAudioButton = document.getElementById("downloadAudioButton");
 let logElement = document.getElementById("log");
 
 let recordingTimeMS = 5000;
 
+// service firebase.storage {
+//   match /b/{bucket}/o {
+//     match /{allPaths=**} {
+//       allow read, write: if request.auth != null;
+//     }
+//   }
+// }
+
 var stopNow = true;
+var storage = firebase.storage();
+var storageRef = storage.ref();
+var videosRef = storageRef.child('videos');
+var recordingRef = videosRef.child('videos/recording.webm');
 
 function log(msg) {
   console.log(msg);
@@ -81,14 +94,21 @@ function beginRecording() {
     .then (recordedChunks => {
       let recordedBlob = new Blob(recordedChunks, { type: "video/webm" });
 
+      recordingRef.put(recordedBlob).then(function(snapshot) {
+        console.log('Uploaded a blob!');
+      });
+
       //download the recording as a webm
       recording.src = URL.createObjectURL(recordedBlob);
       downloadButton.href = recording.src;
       downloadButton.download = "RecordedVideo.webm";
       downloadButton.click();
 
+      // $.ajax({
+      //    url: "step.py",
+      // });
+
       log("Successfully recorded " + recordedBlob.size + " bytes of " + recordedBlob.type + " media.");
     }).catch(log);
-
   }
 }

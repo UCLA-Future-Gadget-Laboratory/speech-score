@@ -5,6 +5,7 @@
     <title>Speech Score</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://use.fontawesome.com/bbae49e875.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   </head>
   <body>
 
@@ -16,19 +17,17 @@
     </div>
 
     <div class="right">
-      
+
     </div>
 
     <video id="recording"></video>
     <a id="downloadButton" class="button">Download</a>
-
-
-    <!-- Camera recording and screen mirroring -->
-    <script src="script.js"></script>
+    <a id="downloadAudioButton" class="button">Download</a>
 
 
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-storage.js"></script>
     <script>
       // Initialize Firebase
       var config = {
@@ -42,6 +41,11 @@
       firebase.initializeApp(config);
 
     </script>
+
+    <!-- Camera recording and screen mirroring -->
+    <script src="script.js"></script>
+
+
 
   </body>
 </html>
