@@ -15,11 +15,14 @@ let recordingTimeMS = 5000;
 //   }
 // }
 
+console.log('SOS HELP');
+
+//
 var stopNow = true;
-var storage = firebase.storage();
-var storageRef = storage.ref();
-var videosRef = storageRef.child('videos');
-var recordingRef = videosRef.child('videos/recording.webm');
+// var storage = firebase.storage();
+// var storageRef = storage.ref();
+// var videosRef = storageRef.child('videos');
+// var recordingRef = videosRef.child('videos/recording.webm');
 
 function log(msg) {
   console.log(msg);
@@ -59,6 +62,7 @@ function stop(stream) {
 
 
 startButton.addEventListener("click", function() {
+  console.log("button was pressed");
   stopNow = false;
   beginRecording();
   startButton.style.visibility = "hidden";
