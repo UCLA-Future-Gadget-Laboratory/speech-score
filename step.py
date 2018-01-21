@@ -1,28 +1,39 @@
 from main import *
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import db
+
+global transProc
+
 
 if __name__ == '__main__':
 
-	# Extracts audio chunk from video chunk
+	# Fetch the service account key JSON file contents
+	cred = credentials.Certificate('./SBHacks-c18839cd7d0f.json')
 
-	# Passes audio chunk to Google Speech API and returns/saves transcript
+	# Initialize the app with a service account, granting admin privileges
+	firebase_admin.initialize_app(cred, {
+	    'databaseURL': "https://sbhacks-1516442289825.firebaseio.com"
+	})
+
+	# As an admin, the app has access to read and write all data, regradless of Security Rules
+	ref = db.reference('data')
+	print("SUCCESS!")
 
 	# Uses Google NLP API to perform sentiment analysis, etc. on transcript
 	# Use Python to produce JSON file
-	if DEBUGGING:
+	ref.child('info').push().set(info)
+	# if DEBUGGING:
 
-		with open(TRANSCRIPT_SAVE_PATH, 'r') as text:
-			total_lines = len(text.readlines())
+	# 	with open(TRANSCRIPT_SAVE_PATH, 'r') as text:
+	# 		total_lines = len(text.readlines())
 
-		for i in range(total_lines):
-			info = transProc.step()
-			print(info)
+	# 	for i in range(total_lines):
+	# 		info = transProc.step()
+	# 		ref.child('info').push().set(info)
 
-		print("The final transcript is \"{}\"".format(transProc.output_final()))
+	# 	print("The final transcript is \"{}\"".format(transProc.output_final()))
 
-
-	# Use Node.js to push JSON data to Firebase Realtime Database
-
-	# Bit clumsy here: We are saving JSON file locally, pushing it to Firebase database, then reading it again from firebase database...
 
 	"""
 	Using Node.js SDK,

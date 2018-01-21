@@ -2,10 +2,12 @@ import json
 import gcpScript
 import step
 
-global INPUT_CHUNK_LENGTH, VIDEO_SAVE_PATH, AUDIO_SAVE_PATH, TRANSCRIPT_SAVE_PATH, JSON_SAVE_PATH, FINAL_SAVE_PATH, DEBUGGING
+global transProc
 
 def init():
 	""" Loads config file into global variables """
+
+	global INPUT_CHUNK_LENGTH, VIDEO_SAVE_PATH, AUDIO_SAVE_PATH, TRANSCRIPT_SAVE_PATH, JSON_SAVE_PATH, FINAL_SAVE_PATH, DEBUGGING
 
 	with open('config.json') as json_data_file:
 		config = json.load(json_data_file)
