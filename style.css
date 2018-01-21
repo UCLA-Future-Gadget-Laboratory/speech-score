@@ -28,14 +28,15 @@ video {
 }
 .left {
   float: left;
+    display: inline-block;
   width: 133.33vh;
   background: black;
   text-align: left;
   position: relative;
 }
 .right {
-  float: right;
-  width: 40%;
+  display: inline-block;
+  position: fixed;
 }
 
 /* from example */
