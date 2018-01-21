@@ -17,7 +17,7 @@ app.use(express.static(__dirname));
 // var options = { pythonPath: 'path/to/python3' };
 
 // server needs to be listening on a port to wait for requests
-app.get("/run-step", (request, response) => {
+app.get("/reset", (request, response) => {
 
   console.log("GET request received!");
 
@@ -28,7 +28,7 @@ app.get("/run-step", (request, response) => {
   //   console.log('finished');
   // });
 
-  PythonShell.run('/main.py', function (err) { 
+  PythonShell.run('/reset.py', function (err) { 
     if (err) throw err;
     
     console.log('success');

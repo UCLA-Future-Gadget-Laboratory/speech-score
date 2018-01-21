@@ -97,7 +97,8 @@ class gcpScript():
 		"""
 		"""
 		speechRecognitionObj = CloudSpeechRecognition()
-		chunk = speechRecognitionObj.transcribe(audio_file, "webm")
+		audioFileExt = audio_file.strip('.')[-1]
+		chunk = speechRecognitionObj.transcribe(audio_file, audioFileExt)
 		return chunk
 
 

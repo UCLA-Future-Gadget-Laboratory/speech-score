@@ -37,3 +37,8 @@ def reset():
 		json.dump(stream_data, filename)
 
 	return
+
+
+if __name__ == '__main__':
+
+	reset()
