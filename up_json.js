@@ -1,18 +1,4 @@
-// Uploads the json data to Firebase RTD
-
-// <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
-// <script>
-//   // Initialize Firebase
-//   var config = {
-//     apiKey: "AIzaSyCsgK_msaA1GXmYQYrZBO4vIje4gUGbrlE",
-//     authDomain: "sbhacks-1516442289825.firebaseapp.com",
-//     databaseURL: "https://sbhacks-1516442289825.firebaseio.com",
-//     projectId: "sbhacks-1516442289825",
-//     storageBucket: "sbhacks-1516442289825.appspot.com",
-//     messagingSenderId: "203547820043"
-//   };
-//   firebase.initializeApp(config);
-// </script>
+// Takes json file from Firebase and analyzes it
 
 var admin = require('firebase-admin');
 

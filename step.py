@@ -16,23 +16,24 @@ if __name__ == '__main__':
 	    'databaseURL': "https://sbhacks-1516442289825.firebaseio.com"
 	})
 
-	# As an admin, the app has access to read and write all data, regradless of Security Rules
+	# As an admin, the app has access to read and write all data, regardless of Security Rules
 	ref = db.reference('data')
-	print("SUCCESS!")
 
-	# Uses Google NLP API to perform sentiment analysis, etc. on transcript
-	# Use Python to produce JSON file
-	ref.child('info').push().set(info)
-	# if DEBUGGING:
+	# Passes audio chunk to Google Speech API, generates transcript
 
-	# 	with open(TRANSCRIPT_SAVE_PATH, 'r') as text:
-	# 		total_lines = len(text.readlines())
+	# # Uses Google NLP API to perform sentiment analysis, etc. on transcript
+	# # Use Python to produce JSON file
+	# ref.child('info').push().set(info)
+	if DEBUGGING:
 
-	# 	for i in range(total_lines):
-	# 		info = transProc.step()
-	# 		ref.child('info').push().set(info)
+		with open(TRANSCRIPT_SAVE_PATH, 'r') as text:
+			total_lines = len(text.readlines())
 
-	# 	print("The final transcript is \"{}\"".format(transProc.output_final()))
+		for i in range(total_lines):
+			info = transProc.step()
+			ref.child('info').push().set(info)
+
+		print("The final transcript is \"{}\"".format(transProc.output_final()))
 
 
 	"""
