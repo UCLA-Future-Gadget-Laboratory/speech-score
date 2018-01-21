@@ -1,12 +1,34 @@
-from main import *
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 
-global transProc
+import reset, json
+from gcpScript import gcpScript
+global INPUT_CHUNK_LENGTH, VIDEO_SAVE_PATH, AUDIO_SAVE_PATH, TRANSCRIPT_SAVE_PATH, JSON_SAVE_PATH, FINAL_SAVE_PATH
+
+def config():
+	""" Loads config file into global variables """
+	global INPUT_CHUNK_LENGTH, VIDEO_SAVE_PATH, AUDIO_SAVE_PATH, TRANSCRIPT_SAVE_PATH, JSON_SAVE_PATH, FINAL_SAVE_PATH
+
+	with open('config.json') as json_data_file:
+		config = json.load(json_data_file)
+
+		INPUT_CHUNK_LENGTH = config["input"]["INPUT_CHUNK_LENGTH"]
+		VIDEO_SAVE_PATH = config["input"]["VIDEO_SAVE_PATH"]
+		AUDIO_SAVE_PATH = config["input"]["AUDIO_SAVE_PATH"]
+		TRANSCRIPT_SAVE_PATH = config["intermediate"]["TRANSCRIPT_SAVE_PATH"]
+		JSON_SAVE_PATH = config["intermediate"]["JSON_SAVE_PATH"]
+		FINAL_SAVE_PATH = config["final"]["FINAL_SAVE_PATH"]
+
+		DEBUGGING = config["debug_mode"]
+		CHUNKS_PER_MINUTE = int(60//(INPUT_CHUNK_LENGTH/1000))
+
 
 
 if __name__ == '__main__':
+
+	reset.reset()
+	config()
 
 	# Fetch the service account key JSON file contents
 	cred = credentials.Certificate('./SBHacks-c18839cd7d0f.json')
@@ -21,19 +43,18 @@ if __name__ == '__main__':
 
 	# Passes audio chunk to Google Speech API, generates transcript
 
+
 	# # Uses Google NLP API to perform sentiment analysis, etc. on transcript
 	# # Use Python to produce JSON file
-	# ref.child('info').push().set(info)
-	if DEBUGGING:
+	# Assumes transcript saved to TRANSCRIPT_SAVE_PATH
+	with open(TRANSCRIPT_SAVE_PATH, 'r') as fin:
+		lines = fin.readlines()
+		for i in range(len(lines)):
 
-		with open(TRANSCRIPT_SAVE_PATH, 'r') as text:
-			total_lines = len(text.readlines())
-
-		for i in range(total_lines):
-			info = transProc.step()
-			ref.child('info').push().set(info)
-
-		print("The final transcript is \"{}\"".format(transProc.output_final()))
+			gcp = gcpScript()
+			info = gcp.step()
+			print(info)
+			ref.push().set(info)
 
 
 	"""

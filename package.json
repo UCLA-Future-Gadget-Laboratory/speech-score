@@ -1,0 +1,23 @@
+{
+  "name": "speech-score",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "dependencies": {
+    "firebase": "^4.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/insomnolent/speech-score.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/insomnolent/speech-score/issues"
+  },
+  "homepage": "https://github.com/insomnolent/speech-score#readme"
+}

@@ -8,7 +8,8 @@
 
 	"intermediate": {
 		"JSON_SAVE_PATH": "results.json",
-		"TRANSCRIPT_SAVE_PATH": "transcript.txt"
+		"TRANSCRIPT_SAVE_PATH": "transcript.txt",
+		"chunk_num": 0
 	},
 
 	"final": {

@@ -14,7 +14,7 @@ class CloudSpeechRecognition:
         pass
 
     def transcribe(self, audio, type):
-        audioFileOriginal = AudioSegment.from_file("AudioFile.m4a", type)
+        audioFileOriginal = AudioSegment.from_file(audio, type)
         audioFileOriginal.export("AudioFile.flac", format="flac")
 
         audioFileConverted = io.open("AudioFile.flac", 'rb')
@@ -32,17 +32,15 @@ class CloudSpeechRecognition:
             language_code='en-US')
 
         response = self.client.recognize(config, audio)
-        # Each result is for a consecutive portion of the audio. Iterate through
-        # them to get the transcripts for the entire audio file.
-        for result in response.results:
-            # The first alternative is the most likely one for this portion.
-            print('Transcript: {}'.format(result.alternatives[0].transcript))
+
+        chunk_transcript = response.results[0].alternatives[0].transcript
+        # # Each result is for a consecutive portion of the audio. Iterate through
+        # # them to get the transcripts for the entire audio file.
+        # for result in response.results:
+        #     # The first alternative is the most likely one for this portion.
+        #     print('Transcript: {}'.format(result.alternatives[0].transcript))
 
         audioFileConverted.close()
         os.remove("AudioFile.flac")
+        return chunk_transcript
 
-
-if __name__ == "__main__":
-    csr = CloudSpeechRecognition()
-    csr.transcribe("AudioFile.m4a", "m4a")
-    

@@ -1,43 +1,40 @@
 import json
 from cloudNaturalLanguage import CloudNaturalLanguage
+from cloudSpeechRecognition import CloudSpeechRecognition
 
-global DEBUGGING
 
-class gcpScript:
+class gcpScript():
 	"""
-	DEBUGGING:
-	Hard-code transcript.txt
+	This is a JSONObject
+	It has a __dict__ attribute
 
-	Save the text of each "chunk" in a new line
+	Its __dict__ is initialized with the JSON file
+	Its __dict__ is dumped to the JSON file
 	"""
 
-	def __init__(self, transcript_path, chunks_per_minute, debug = False):
+	def __init__(self):
 		"""
-		Constants, passed at initialization:
-			transcript_path
-			chunks_per_minute
-		
-		Variables, updated each step:
-			words_last_minute: a list of strings, contains text of last minute's chunks
-			word_count: a list of ints, num of words per chunk
-			info: information on recent transcript text, dictionary
+		Initialize the __dict__
 		"""
-		global DEBUGGING
-		DEBUGGING = debug
-		self.transcript_path = transcript_path
-		self.chunks_per_minute = chunks_per_minute
-		# TODO: Transfer this functionality to use Firebase Database
+		with open("stream_data.json", "r") as filename:
+			data = filename.read()	
+			self.__dict__ = json.loads(data)
 
-		self.words_last_minute = ['' for _ in range(chunks_per_minute)]
-		self.word_count = []
-		self.WPM = []
+			print(self.__dict__)
 
-		self.info = {}
-		# DEBUGGING: Read a file based on chunk_num
-		self.chunk_num = 0
+		with open("config.json", "r") as json_data_file:
+			config = json.load(json_data_file)
+
+			self.INPUT_CHUNK_LENGTH = config["input"]["INPUT_CHUNK_LENGTH"]
+			self.VIDEO_SAVE_PATH = config["input"]["VIDEO_SAVE_PATH"]
+			self.AUDIO_SAVE_PATH = config["input"]["AUDIO_SAVE_PATH"]
+			self.TRANSCRIPT_SAVE_PATH = config["intermediate"]["TRANSCRIPT_SAVE_PATH"]
+			self.JSON_SAVE_PATH = config["intermediate"]["JSON_SAVE_PATH"]
+			# self.FINAL_SAVE_PATH = config["final"]["FINAL_SAVE_PATH"]
 
 
 	def output_final(self):
+		""" Outputs final transcript """
 		with open(self.transcript_path, 'r') as transcript:
 			lines = transcript.readlines()
 			lines = [l.rstrip() for l in lines]
@@ -52,28 +49,38 @@ class gcpScript:
 		self.read()
 
 		# Calculates average WPM
-		NUM_CHUNKS = min(self.word_count[-1], self.chunks_per_minute)
+		NUM_CHUNKS = min(len(self.word_count), self.chunks_per_minute)
 		self.WPM.append(sum(self.word_count[-NUM_CHUNKS:])*(self.chunks_per_minute/NUM_CHUNKS))
 
 		# Does sentiment analysis on minute history
 		# TODO: Pass list instead of copying the string
 		text = ' '.join(self.words_last_minute)
-		info = self.analyzeTranscript(text)
+		self.analyzeTranscript(text)
 
 		self.chunk_num += 1
-		return info
+		
+		# Update stream_data.json
+		with open('stream_data.json', 'w') as filename:
+			json.dump(self.__dict__, filename)
+		return self.__dict__
 
 
 	def read(self):
 		""" 
 		Returns new transcript text as list of words
 		"""
+		# Generates audio file name, e.g. audio_0.webm, audio_1.webm, etc.
+		audio_file = self.AUDIO_SAVE_PATH.split('.')
+		audio_file = audio_file[0] + '_' + str(self.chunk_num) + '.' + audio_file[1]
+
+		### HARDCODING
 		with open(self.transcript_path, 'r') as transcript:
 			lines = transcript.readlines()
-			chunk = lines[-1].split()
+			print(self.chunk_num)
+			chunk = lines[self.chunk_num].split()
 
-			if DEBUGGING:
-				chunk = lines[self.chunk_num].split()
+		### ACTUAL
+		# chunk = self.generateTranscript(self.AUDIO_SAVE_PATH)			###
 
 		# Calculates number of words in this chunk
 		chunk_length = len(chunk)
@@ -82,6 +89,14 @@ class gcpScript:
 		# Adds words from this chunk to minute history
 		self.words_last_minute.pop(0)
 		self.words_last_minute.append(' '.join(chunk))
+
+
+	def generateTranscript(self, audio_file):
+		"""
+		"""
+		speechRecognitionObj = CloudSpeechRecognition()
+		chunk = csr.transcribe(audio_file, "webm")
+		return chunk
 
 
 	def analyzeTranscript(self, text):
@@ -98,17 +113,7 @@ class gcpScript:
 			}
 		}
 		"""
-
 		naturalLanguageObj = CloudNaturalLanguage()
-		sentiment = naturalLanguageObj.analyzeSentiment(text)
-
-		self.info['sentiment'] = sentiment
-		self.info['WPM'] = self.WPM[-1]
-
-		return json.dumps(self.info)
-
-
-# TODO: Calculate words per minute and store it in the JSON output
-
-
-# TODO: Store the JSON output into firebase
+		self.sentiment = naturalLanguageObj.analyzeSentiment(text)
+		self.average_WPM = self.WPM[-1]
+		return
