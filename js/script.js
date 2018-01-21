@@ -107,9 +107,9 @@ function beginRecording() {
       downloadButton.download = "RecordedVideo.webm";
       downloadButton.click();
 
-      // $.ajax({
-      //    url: "step.py",
-      // });
+      $.ajax({
+         url: "step.py",
+      });
 
       log("Successfully recorded " + recordedBlob.size + " bytes of " + recordedBlob.type + " media.");
     }).catch(log);
