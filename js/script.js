@@ -15,6 +15,9 @@ let recordingTimeMS = 5000;
 //   }
 // }
 
+console.log('SOS HELP');
+
+
 var stopNow = true;
 var storage = firebase.storage();
 var storageRef = storage.ref();
