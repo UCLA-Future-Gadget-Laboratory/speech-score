@@ -76,20 +76,20 @@ class gcpScript():
 		audio_file = audio_file[0] + '_' + str(self.chunk_num) + '.' + audio_file[1]
 
 		# ### HARDCODING
-		# with open(self.transcript_path, 'r') as transcript:
-		# 	lines = transcript.readlines()
-		# 	print(self.chunk_num)
-		# 	chunk = lines[self.chunk_num].split()
+		with open(self.transcript_path, 'r') as transcript:
+			lines = transcript.readlines()
+			print(self.chunk_num)
+			chunk = lines[self.chunk_num].split()
 
 		### ACTUAL
-		chunk = self.generateTranscript(audio_file)			###
+		# chunk = self.generateTranscript(audio_file)			###
 
 		# Calculates number of words in this chunk
 		chunk_length = len(chunk)
 		self.word_count.append(chunk_length)
 
 		# Adds words from this chunk to minute history
-		self.transcript.append(' '.join(chunk))
+		self.transcript += ' ' + ' '.join(chunk)
 		self.words_last_minute.pop(0)
 		self.words_last_minute.append(' '.join(chunk))
 
