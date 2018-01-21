@@ -1,11 +1,42 @@
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
 #downloadButton, #recording {
   display: none;
 }
-#video {
-	display: inline-block;
-	width: 600px;
+
+
+#startButton, #stopButton {
+  position: absolute;
+  bottom: 10vh;
+  left: 50%;
+  right: 50%;
 }
-#charts {
+#stopButton {
+  visibility: hidden;
+}
+video {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+}
+.fa-play-circle-o {
+  color: white;
+}
+.fa-stop-circle-o {
+  color: white;
+}
+.left {
 	display: inline-block;
-	width: 400px;
+  float: left;
+  width: 133.33vh;
+  background: black;
+  text-align: left;
+  position: relative;
+}
+.right {
+	display: inline-block;
+	position: fixed;
 }

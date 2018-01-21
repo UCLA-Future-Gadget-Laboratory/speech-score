@@ -5,29 +5,29 @@
     <title>Speech Score</title>
     <link rel="stylesheet" href="style.css">
     <!-- fusion charts --> 
-    <script src="js/fusioncharts.js"></script>
+      <script src="https://static.fusioncharts.com/code/latest/fusioncharts.js"></script>
+    <!-- <script src="js/fusioncharts.js"></script> -->
     <script src="js/fusioncharts.charts.js"></script>
 
     <!-- firebase -->
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
 
-    <script src="js/app.js"></script>
-    <script src="js/app_data.js"></script>
+    <script src="js/init_firebase.js"></script>
+    <script src="js/words_per_min.js"></script>
+    <script src="https://use.fontawesome.com/bbae49e875.js"></script>
   </head>
   <body>
-    <div id="video">
-      <video id="preview" autoplay muted></video>
-      <button id="startButton">Start</button>
-      <button id="stopButton">Stop</button>
 
-
-      <video id="recording"></video>
-      <a id="downloadButton" class="button">Download</a>
+    <div class="left">
+      <video id="preview" autoplay muted>
+      </video>
+      <i class="fa fa-play-circle-o fa-5x" aria-hidden="true" id="startButton"></i>
+      <i class="fa fa-stop-circle-o fa-5x" aria-hidden="true" id="stopButton"></i>
     </div>
-    <div id="charts">
+
+    <div class="right">
       <div id="chart-container">
-      </div>
     </div>
 
     
@@ -35,6 +35,23 @@
 
     <!-- Camera recording and screen mirroring -->
     <script src="js/script.js"></script>
+
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDM9L1r4BwgTtw28iD3M2p1hVAkizblXnY",
+        authDomain: "speech-score-be574.firebaseapp.com",
+        databaseURL: "https://speech-score-be574.firebaseio.com",
+        projectId: "speech-score-be574",
+        storageBucket: "speech-score-be574.appspot.com",
+        messagingSenderId: "62579755631"
+      };
+      firebase.initializeApp(config);
+
+    </script>
 
   </body>
 </html>
