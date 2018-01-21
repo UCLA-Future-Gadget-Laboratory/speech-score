@@ -19,6 +19,49 @@
 .c3-bars path {
   shape-rendering: crispEdges; }
 
+.c3 .c3-axis-x path, .c3 .c3-axis-x line {
+    stroke: white;
+}
+.c3 .c3-axis-y path, .c3 .c3-axis-y line {
+    stroke: white;
+}
+
+/*.inverted .c3 .c3-axis-x path,
+.inverted .c3 .c3-axis-x line,
+
+.inverted .c3 .c3-axis-y path,
+.inverted .c3 .c3-axis-y line {
+    stroke: white;
+}*/
+
+
+.inverted .c3 .c3-axis-x path,
+.inverted .c3 .c3-axis-x line,
+.inverted .c3 .c3-axis-y path,
+.inverted .c3 .c3-axis-y line {
+    stroke: white;
+}
+
+.inverted .c3 .c3-axis-x g,
+.inverted .c3 .c3-axis-y g,
+.inverted .c3 .c3-legend-item-data text,
+.inverted .c3 .c3-axis-y-label,
+.inverted .c3 .c3-axis-x-label,
+.inverted .c3 .c3-legend-item  {
+    fill: whitesmoke;
+}
+
+.inverted .c3 text.c3-text { 
+    fill: whitesmoke!important;
+    stroke: whitesmoke!important;
+    stroke-opacity: 0.3!important;
+}
+
+/* for the tooltip text color */
+.inverted .c3 .c3-tooltip-container {
+    color:darkgrey;
+}
+
 .c3-chart-arc path {
   stroke: #fff; }
 
