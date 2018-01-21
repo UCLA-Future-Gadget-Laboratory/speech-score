@@ -13,6 +13,8 @@
 
 	"final": {
 		"FINAL_SAVE_PATH": "final_results.json"
-	}
+	},
+
+	"debug_mode": true
 
 }
