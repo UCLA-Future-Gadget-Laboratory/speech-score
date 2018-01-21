@@ -72,17 +72,16 @@ class gcpScript():
 		Returns new transcript text as list of words
 		"""
 		# Generates audio file name, e.g. audio_0.webm, audio_1.webm, etc.
-		audio_file = self.AUDIO_SAVE_PATH.split('.')
-		audio_file = audio_file[0] + '_' + str(self.chunk_num) + '.' + audio_file[1]
+		audio_file = AUDIO_SAVE_PATH.replace('#', chunk_num)
 
 		# ### HARDCODING
-		with open(self.transcript_path, 'r') as transcript:
-			lines = transcript.readlines()
-			print(self.chunk_num)
-			chunk = lines[self.chunk_num].split()
+		# with open(self.transcript_path, 'r') as transcript:
+		# 	lines = transcript.readlines()
+		# 	print(self.chunk_num)
+		# 	chunk = lines[self.chunk_num].split()
 
 		### ACTUAL
-		# chunk = self.generateTranscript(audio_file)			###
+		chunk = self.generateTranscript(audio_file)			###
 
 		# Calculates number of words in this chunk
 		chunk_length = len(chunk)
