@@ -59,8 +59,8 @@ if __name__ == '__main__':
 
 	"""
 	Using Node.js SDK,
-	Extract new contents in Realtime Database, 
-	parse it, 
+	Extract new contents in Realtime Database,
+	parse it,
 	and provide immediate feedback on-screen
 
 	Browser must react to new changes in the Realtime Database
