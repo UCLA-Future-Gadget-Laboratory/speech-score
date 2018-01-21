@@ -27,7 +27,7 @@ def config():
 
 if __name__ == '__main__':
 
-	reset.reset()
+	# reset.reset()
 	config()
 
 	# Fetch the service account key JSON file contents
@@ -45,14 +45,15 @@ if __name__ == '__main__':
 	# # Uses Google NLP API to perform sentiment analysis, etc. on transcript
 	# # Use Python to produce JSON file
 	# Assumes transcript saved to TRANSCRIPT_SAVE_PATH
-	with open(TRANSCRIPT_SAVE_PATH, 'r') as fin:
-		lines = fin.readlines()
-		for i in range(len(lines)):
+	with open('hi.json', 'w') as filename:
+		json.dump({}, filename)
 
-			gcp = gcpScript()
-			info = gcp.step()
-			print(info)
-			ref.push().set(info)
+
+
+	gcp = gcpScript()
+	info = gcp.step()
+	print(info)
+	ref.push().set(info)
 
 
 	"""

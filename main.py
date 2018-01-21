@@ -1,10 +1,10 @@
 import json
 import gcpScript
-import config
+import reset
 
 
 if __name__ == '__main__':
 
 	# Initialize json files
-	config.config()
+	reset.reset();
 
