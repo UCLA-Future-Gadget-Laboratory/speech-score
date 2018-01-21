@@ -3,7 +3,7 @@ html, body {
   margin: 0;
 }
 
-#downloadButton, #recording, #downloadAudioButton {
+#downloadButton, #recording {
   display: none;
 }
 #startButton, #stopButton {
