@@ -3,7 +3,7 @@
 	"input": {
 		"INPUT_CHUNK_LENGTH": 5000,
 		"VIDEO_SAVE_PATH": "video.mp4",
-		"AUDIO_SAVE_PATH": "/home/haoyu/Downloads/audio_#_.webm"
+		"AUDIO_SAVE_PATH": "/home/haoyu/Downloads/audio_#.webm"
 	},
 
 	"intermediate": {

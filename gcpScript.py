@@ -72,7 +72,7 @@ class gcpScript():
 		Returns new transcript text as list of words
 		"""
 		# Generates audio file name, e.g. audio_0.webm, audio_1.webm, etc.
-		audio_file = AUDIO_SAVE_PATH.replace('#', chunk_num)
+		audio_file = self.AUDIO_SAVE_PATH.replace('#', str(self.chunk_num))
 
 		# ### HARDCODING
 		# with open(self.transcript_path, 'r') as transcript:

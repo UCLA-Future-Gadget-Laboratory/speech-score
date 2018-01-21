@@ -28,17 +28,21 @@ class CloudSpeechRecognition:
         audio = types.RecognitionAudio(content=content)
         config = types.RecognitionConfig(
             encoding=enums.RecognitionConfig.AudioEncoding.FLAC,
-            sample_rate_hertz=24000,
+            sample_rate_hertz=48000,
             language_code='en-US')
 
         response = self.client.recognize(config, audio)
 
-        chunk_transcript = response.results[0].alternatives[0].transcript
-        # # Each result is for a consecutive portion of the audio. Iterate through
-        # # them to get the transcripts for the entire audio file.
-        # for result in response.results:
-        #     # The first alternative is the most likely one for this portion.
-        #     print('Transcript: {}'.format(result.alternatives[0].transcript))
+        print(response)
+
+        # chunk_transcript=None
+
+        # chunk_transcript = response.results.alternatives[0].transcript
+        # Each result is for a consecutive portion of the audio. Iterate through
+        # them to get the transcripts for the entire audio file.
+        for result in response.results:
+            # The first alternative is the most likely one for this portion.
+            print('Transcript: {}'.format(result.alternatives[0].transcript))
 
         audioFileConverted.close()
         os.remove("AudioFile.flac")

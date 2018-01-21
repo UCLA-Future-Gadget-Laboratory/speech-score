@@ -10,7 +10,7 @@ def config():
 	""" Loads config file into global variables """
 	global INPUT_CHUNK_LENGTH, VIDEO_SAVE_PATH, AUDIO_SAVE_PATH, TRANSCRIPT_SAVE_PATH, JSON_SAVE_PATH, FINAL_SAVE_PATH
 
-	with open('config.json') as json_data_file:
+	with open('config.json', 'r') as json_data_file:
 		config = json.load(json_data_file)
 
 		INPUT_CHUNK_LENGTH = config["input"]["INPUT_CHUNK_LENGTH"]
@@ -26,29 +26,41 @@ def config():
 
 
 if __name__ == '__main__':
+	run()
 
+
+def run():
 	# reset.reset()
 	config()
+
+	print("HI")
 
 	# Fetch the service account key JSON file contents
 	cred = credentials.Certificate('./SBHacks-c18839cd7d0f.json')
 
+	print("HI")
 	# Initialize the app with a service account, granting admin privileges
 	firebase_admin.initialize_app(cred, {
 	    'databaseURL': "https://sbhacks-1516442289825.firebaseio.com"
 	})
 
+	print("HI")
+	
 	# As an admin, the app has access to read and write all data, regardless of Security Rules
 	ref = db.reference('data')
 	ref.set({})
+
+	print("HI")
 	
 	# # Uses Google NLP API to perform sentiment analysis, etc. on transcript
 	# # Use Python to produce JSON file
 	# Assumes transcript saved to TRANSCRIPT_SAVE_PATH
 	with open('hi.json', 'w') as filename:
-		json.dump({}, filename)
+		d = {}
+		d['hi']=0
+		json.dump(d, filename)
 
-
+	print("HI")
 
 	gcp = gcpScript()
 	info = gcp.step()
