@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Speech Score</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <!-- Custom fonts for this template -->
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/grayscale.css" rel="stylesheet">
+
+    <link rel="shortcut icon" type="image/png" href="./img/potion.png"/>
+
+    <link rel="stylesheet" href="c3.css">
+    <script src="jquery-3.2.0.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="c3.min.js"></script>
+    <script src="https://use.fontawesome.com/bbae49e875.js"></script>
+
+  </head>
+
+  <body>
+    <section class="content-section text-center" style="padding-bottom: 0">
+    <div class="container">
+      <div class="row wow fadeInDown" data-wow-duraction="1000ms" data-wow-delay="300ms">
+        <div class="col-lg-12 mx-auto">
+          <h2 style="font-family: Lato; font-size: 60px">Summary Statistics</h2>
+
+          <p class="intro-text" style="font-size: 22px; font-family: Lato">View your personalized results here!</p>
+
+          <div class="col-lg-4">
+            <div id="chart4"></div>
+            <script>
+            var chart = c3.generate({
+                bindto: '#chart4',
+                data: {
+                    columns: [
+                        ['data1', 300, 350, 300, 0, 0, 0],
+                        ['data2', 130, 100, 140, 200, 150, 50]
+                    ],
+                    types: {
+                        data1: 'area-spline',
+                        data2: 'area-spline'
+                    },
+                     colors: {
+                       data1: 'lightgreen',
+                       data2: 'lightpink'
+                     }
+                }
+            });
+            </script>
+            <p style="font-family: Lato; font-size: 18px">Sentiment Analysis</p>
+
+          </div>
+
+          <div class="col-lg-4">
+            <div id="chart3"></div>
+            <script>
+            var chart = c3.generate({
+                bindto: '#chart3',
+                data: {
+                    columns: [
+                        ['data1', 30],
+                        ['data2', 10],
+                        ['data3', 24],
+                        ['data4', 43]
+                    ],
+                    type: 'bar'
+                  },
+                  bar: {
+                    width: {
+                      ratio: 0.5
+                    }
+                  }
+                });
+            </script>
+            <p style="font-family: Lato; font-size: 18px">Number of Notifications</p>
+
+          </div>
+
+          <div class="col-lg-4">
+            <div id="chart5"></div>
+            <script>
+            var chart = c3.generate({
+                bindto: '#chart5',
+                data: {
+                    columns: [
+                        ['data1', 370, 335, 300, 200, 108, 250]
+                    ],
+                    types: {
+                        data1: 'area-spline',
+                    },
+                     colors: {
+                       data1: 'lightblue',
+                     }
+                }
+            });
+            </script>
+            <p style="font-family: Lato; font-size: 18px">Words Per Minute</p>
+            </div>
+        </div>
+            
+      </div>
+    </div>
+  </section>
+
+<!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-storage.js"></script>
+    <script src="js/init_firebase.js"></script>
+
+    <!-- Camera recording and screen mirroring -->
+    <script src="js/script.js"></script>
+
+    <!-- fusion charts -->
+    <script src="https://static.fusioncharts.com/code/latest/fusioncharts.js"></script>
+    <!-- <script src="js/fusioncharts.js"></script> -->
+    <script src="js/fusioncharts.charts.js"></script>
+    <script src="js/words_per_min.js"></script>
+
+    <script src="js/sentiment.js"></script>
+  
+
+  </body>
+</html>
