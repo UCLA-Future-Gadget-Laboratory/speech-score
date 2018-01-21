@@ -9,6 +9,8 @@ let recordingTimeMS = 5000;
 
 var count = 0;
 
+
+
 // service firebase.storage {
 //   match /b/{bucket}/o {
 //     match /{allPaths=**} {
@@ -65,16 +67,16 @@ startButton.addEventListener("click", function() {
   console.log("button was pressed");
   stopNow = false;
   beginRecording();
-  startButton.style.visibility = "hidden";
-  stopButton.style.visibility = "visible";
+  startButton.style.display = "none";
+  stopButton.style.display = "inline";
   preview.style.visibility = "visible";
 }, false);
 
 stopButton.addEventListener("click", function() {
   stopNow = true;
   stop(preview.srcObject);
-  startButton.style.visibility = "visible";
-  stopButton.style.visibility = "hidden";
+  startButton.style.display = "inline";
+  stopButton.style.display = "none";
   preview.style.visibility = "hidden";
 
 }, false);
@@ -107,10 +109,10 @@ function beginRecording() {
       downloadButton.click();
       count += 1;
 
-      $.ajax({
-         url: "localhost:5001/run-step",
-         method: "POST"
-      }); // jquery ajax
+      // $.ajax({
+      //    url: "localhost:5001/run-step",
+      //    method: "POST"
+      // }); // jquery ajax
 
       log("Successfully recorded " + recordedBlob.size + " bytes of " + recordedBlob.type + " media.");
     }).catch(log);
