@@ -6,8 +6,6 @@ html, body {
 #downloadButton, #recording {
   display: none;
 }
-
-
 #startButton, #stopButton {
   position: absolute;
   bottom: 10vh;
@@ -29,7 +27,6 @@ video {
   color: white;
 }
 .left {
-	display: inline-block;
   float: left;
   width: 133.33vh;
   background: black;
@@ -37,6 +34,6 @@ video {
   position: relative;
 }
 .right {
-	display: inline-block;
-	position: fixed;
+  float: right;
+  width: 40%;
 }

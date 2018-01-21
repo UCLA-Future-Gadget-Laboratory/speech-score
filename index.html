@@ -4,18 +4,8 @@
     <meta charset="utf-8">
     <title>Speech Score</title>
     <link rel="stylesheet" href="style.css">
-    <!-- fusion charts --> 
-      <script src="https://static.fusioncharts.com/code/latest/fusioncharts.js"></script>
-    <!-- <script src="js/fusioncharts.js"></script> -->
-    <script src="js/fusioncharts.charts.js"></script>
-
-    <!-- firebase -->
-    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
-
-    <script src="js/init_firebase.js"></script>
-    <script src="js/words_per_min.js"></script>
     <script src="https://use.fontawesome.com/bbae49e875.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   </head>
   <body>
 
@@ -27,18 +17,16 @@
     </div>
 
     <div class="right">
-      <div id="chart-container">
+
     </div>
 
-    
-
-
-    <!-- Camera recording and screen mirroring -->
-    <script src="js/script.js"></script>
+    <video id="recording"></video>
+    <a id="downloadButton" class="button">Download</a>
 
 
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-storage.js"></script>
     <script>
       // Initialize Firebase
       var config = {
@@ -52,6 +40,11 @@
       firebase.initializeApp(config);
 
     </script>
+
+    <!-- Camera recording and screen mirroring -->
+    <script src="script.js"></script>
+
+
 
   </body>
 </html>
