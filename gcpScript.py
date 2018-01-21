@@ -74,13 +74,13 @@ class gcpScript():
 		audio_file = audio_file[0] + '_' + str(self.chunk_num) + '.' + audio_file[1]
 
 		### HARDCODING
-		with open(self.transcript_path, 'r') as transcript:
-			lines = transcript.readlines()
-			print(self.chunk_num)
-			chunk = lines[self.chunk_num].split()
+		# with open(self.transcript_path, 'r') as transcript:
+		# 	lines = transcript.readlines()
+		# 	print(self.chunk_num)
+		# 	chunk = lines[self.chunk_num].split()
 
 		### ACTUAL
-		# chunk = self.generateTranscript(self.AUDIO_SAVE_PATH)			###
+		chunk = self.generateTranscript(self.AUDIO_SAVE_PATH)			###
 
 		# Calculates number of words in this chunk
 		chunk_length = len(chunk)

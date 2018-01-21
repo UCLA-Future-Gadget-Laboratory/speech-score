@@ -17,8 +17,6 @@ var count = 0;
 //   }
 // }
 
-console.log('SOS HELP');
-
 //
 var stopNow = true;
 // var storage = firebase.storage();
