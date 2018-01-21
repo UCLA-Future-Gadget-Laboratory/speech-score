@@ -31,6 +31,8 @@ def reset():
 		stream_data["average_WPM"] = 0
 		stream_data["chunk_num"] = 0
 		stream_data["chunk"] = ""
+		# Remove transcript, since this would be from local file
+		stream_data["transcript"] = ""
 
 		json.dump(stream_data, filename)
 

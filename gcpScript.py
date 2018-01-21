@@ -12,6 +12,8 @@ class gcpScript():
 	Its __dict__ is dumped to the JSON file
 	"""
 
+	# TODO: Verify that generateTranscript works!!!!!!
+
 	def __init__(self):
 		"""
 		Initialize the __dict__
@@ -73,20 +75,21 @@ class gcpScript():
 		audio_file = self.AUDIO_SAVE_PATH.split('.')
 		audio_file = audio_file[0] + '_' + str(self.chunk_num) + '.' + audio_file[1]
 
-		### HARDCODING
+		# ### HARDCODING
 		with open(self.transcript_path, 'r') as transcript:
 			lines = transcript.readlines()
 			print(self.chunk_num)
 			chunk = lines[self.chunk_num].split()
 
 		### ACTUAL
-		# chunk = self.generateTranscript(self.AUDIO_SAVE_PATH)			###
+		# chunk = self.generateTranscript(audio_file)			###
 
 		# Calculates number of words in this chunk
 		chunk_length = len(chunk)
 		self.word_count.append(chunk_length)
 
 		# Adds words from this chunk to minute history
+		self.transcript += ' ' + ' '.join(chunk)
 		self.words_last_minute.pop(0)
 		self.words_last_minute.append(' '.join(chunk))
 
@@ -95,7 +98,7 @@ class gcpScript():
 		"""
 		"""
 		speechRecognitionObj = CloudSpeechRecognition()
-		chunk = csr.transcribe(audio_file, "webm")
+		chunk = speechRecognitionObj.transcribe(audio_file, "webm")
 		return chunk
 
 

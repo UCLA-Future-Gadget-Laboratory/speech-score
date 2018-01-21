@@ -40,10 +40,8 @@ if __name__ == '__main__':
 
 	# As an admin, the app has access to read and write all data, regardless of Security Rules
 	ref = db.reference('data')
-
-	# Passes audio chunk to Google Speech API, generates transcript
-
-
+	ref.set({})
+	
 	# # Uses Google NLP API to perform sentiment analysis, etc. on transcript
 	# # Use Python to produce JSON file
 	# Assumes transcript saved to TRANSCRIPT_SAVE_PATH
