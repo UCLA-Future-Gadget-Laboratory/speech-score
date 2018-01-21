@@ -19,6 +19,7 @@ if __name__ == '__main__':
 	# As an admin, the app has access to read and write all data, regradless of Security Rules
 	ref = db.reference('data')
 	print("SUCCESS!")
+	g = open("newfile.txt","w")
 
 	# Uses Google NLP API to perform sentiment analysis, etc. on transcript
 	# Use Python to produce JSON file
@@ -37,8 +38,8 @@ if __name__ == '__main__':
 
 	"""
 	Using Node.js SDK,
-	Extract new contents in Realtime Database, 
-	parse it, 
+	Extract new contents in Realtime Database,
+	parse it,
 	and provide immediate feedback on-screen
 
 	Browser must react to new changes in the Realtime Database
