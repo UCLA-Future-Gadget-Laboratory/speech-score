@@ -7,6 +7,8 @@ let logElement = document.getElementById("log");
 
 let recordingTimeMS = 5000;
 
+var count = 0;
+
 // service firebase.storage {
 //   match /b/{bucket}/o {
 //     match /{allPaths=**} {
@@ -103,8 +105,9 @@ function beginRecording() {
       //download the recording as a webm
       recording.src = URL.createObjectURL(recordedBlob);
       downloadButton.href = recording.src;
-      downloadButton.download = "RecordedVideo.webm";
+      downloadButton.download = "audio_" + count + ".webm";
       downloadButton.click();
+      count += 1;
 
       $.ajax({
          url: "localhost:5001/run-step",
