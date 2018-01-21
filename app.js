@@ -7,13 +7,11 @@ var path = require('path');
 var spawn = require("child_process").spawn;
 // var index = require('./routes/index');
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+// // view engine setup
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'ejs');
 
-app.get("/", function(req, res){
-    res.render("index");
-});
+app.use(express.static(__dirname));
 
 // server needs to be listening on a port to wait for requests
 app.get("/run-step", (request, response) => {
@@ -23,14 +21,18 @@ app.get("/run-step", (request, response) => {
 	const runStep = spawn('python3', ["step.py"]);
   	runStep.stdout.on('data', function(data) {
     
-    console.log("Something worked!")
 
     // Use Javascript sdk (or maybe Node.js Admin sdk)
 	// Process data from Firebase (e.g. Sentiment Info, WPM, )
 	// Take that data and display it on screen (with e.g. sliding Fusion Graph)
 
-    response.end("...");
   });
+    runStep.on("close", () => {
+          console.log("Something worked!")
+
+          response.end("...");
+
+    });
 });
 
 // catch 404 and forward to error handler
