@@ -69,6 +69,7 @@ startButton.addEventListener("click", function() {
   startButton.style.display = "none";
   stopButton.style.display = "inline";
   preview.style.visibility = "visible";
+  setTimeout(updateScore, 6000);
 }, false);
 
 stopButton.addEventListener("click", function() {
@@ -77,6 +78,7 @@ stopButton.addEventListener("click", function() {
   startButton.style.display = "inline";
   stopButton.style.display = "none";
   preview.style.visibility = "hidden";
+  
 }, false);
 
 function beginRecording() {
@@ -117,3 +119,13 @@ function beginRecording() {
     }).catch(log);
   }
 }
+
+
+let score = document.getElementById('score');
+function updateScore() {
+  console.log('updateScore is running');
+  var numRand = Math.floor(Math.random() * 31 + 50);
+  score.innerHTML = "Score: " + numRand;
+  setTimeout(updateScore, 5000);
+}
+

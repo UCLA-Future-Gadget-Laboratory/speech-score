@@ -34,13 +34,13 @@
     stroke: white;
 }*/
 
-
+/*
 .inverted .c3 .c3-axis-x path,
 .inverted .c3 .c3-axis-x line,
 .inverted .c3 .c3-axis-y path,
 .inverted .c3 .c3-axis-y line {
     stroke: white;
-}
+}*/
 
 .inverted .c3 .c3-axis-x g,
 .inverted .c3 .c3-axis-y g,
@@ -49,12 +49,13 @@
 .inverted .c3 .c3-axis-x-label,
 .inverted .c3 .c3-legend-item  {
     fill: whitesmoke;
+    stroke: white;
 }
 
 .inverted .c3 text.c3-text { 
     fill: whitesmoke!important;
     stroke: whitesmoke!important;
-    stroke-opacity: 0.3!important;
+    stroke-opacity: 0.6!important;
 }
 
 /* for the tooltip text color */
