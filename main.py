@@ -1,10 +1,12 @@
 import json
 import gcpScript
-import config
-
+import reset
+import importlib
+import step
 
 if __name__ == '__main__':
 
 	# Initialize json files
-	config.config()
+	reset.reset();
 
+	step.run()

@@ -5,6 +5,7 @@ var app = express();
 var server = require('http').Server(app);
 var path = require('path');
 var spawn = require("child_process").spawn;
+var PythonShell = require('python-shell');
 // var index = require('./routes/index');
 
 // // view engine setup
@@ -13,26 +14,47 @@ var spawn = require("child_process").spawn;
 
 app.use(express.static(__dirname));
 
+// var options = { pythonPath: 'path/to/python3' };
+
+// server needs to be listening on a port to wait for requests
+app.get("/reset", (request, response) => {
+
+  console.log("GET request received!");
+
+  // var pyshell = new PythonShell('/step.py');
+
+  // pyshell.end(function (err) {
+  //   if (err) throw err;
+  //   console.log('finished');
+  // });
+
+  PythonShell.run('/reset.py', function (err) { 
+    if (err) throw err;
+    
+    console.log('success');
+    // Use Javascript sdk (or maybe Node.js Admin sdk)
+  // Process data from Firebase (e.g. Sentiment Info, WPM, )
+  // Take that data and display it on screen (with e.g. sliding Fusion Graph)
+
+  });
+
+});
+
 // server needs to be listening on a port to wait for requests
 app.get("/run-step", (request, response) => {
 
-	console.log("GET request received!")
+	console.log("GET request received!");
 
-	const runStep = spawn('python3', ["step.py"]);
-  	runStep.stdout.on('data', function(data) {
+	PythonShell.run('/step.py', function (err) { 
+    if (err) throw err;
     
-
+    console.log('success');
     // Use Javascript sdk (or maybe Node.js Admin sdk)
 	// Process data from Firebase (e.g. Sentiment Info, WPM, )
 	// Take that data and display it on screen (with e.g. sliding Fusion Graph)
 
   });
-    runStep.on("close", () => {
-          console.log("Something worked!")
 
-          response.end("...");
-
-    });
 });
 
 // catch 404 and forward to error handler
