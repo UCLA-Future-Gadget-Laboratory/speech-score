@@ -3,11 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Speech Score</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="jquery-3.2.0.min.js"></script>
-
+    <link rel="stylesheet" href="css/style.css">
     <script src="https://use.fontawesome.com/bbae49e875.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.4.0/wavesurfer.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   </head>
   <body>
@@ -22,8 +19,8 @@
       <p>Improve your speaking skills.</p>
       <video id="preview" autoplay muted width=500 height=500>
       </video>
-
     </div>
+
     <h2>
       <i class="fa fa-play-circle-o fa-5x" aria-hidden="true" id="startButton"></i>
       <a href="./summary.html">
@@ -31,34 +28,10 @@
       </a>
     </h2>
 
-
     <h3 style="position: absolute; font-size: 30px; bottom: 50px; left: 50px; font-family: Lato; color: white" id="score">Score</h3>
 
 
-
     <a href="index.html"><i class="fa fa-podcast fa-3x" aria-hidden="true" id="logo"></i></a>
-
-    <!-- <h2 style="margin:5px">Input text</h2>
-      <input type="text" id="myInput" placeholder="Title...">
-      <span onclick="newElement()" class="addBtn">Enter</span>
- -->
-<!--
-    <div class="right">
-      <div id="chart-container">
-      </div>
-      <div id="input" class="header">
-      <h2 style="margin:5px">Input text</h2>
-        <input type="text" id="myInput" placeholder="Title...">
-        <span onclick="newElement()" class="addBtn">Enter</span>
-
-       </div>
-       <div id="input">
-         <ul id="myUL">
-         </ul>
-      </div> -->
-    </div>
-
-    </div>
 
 
         <!-- Camera recording and screen mirroring -->
@@ -67,24 +40,7 @@
     <a id="audioDownloadButton" class="button">Download</a>
 
 
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-storage.js"></script>
-    <script src="js/init_firebase.js"></script>
-
     <!-- Camera recording and screen mirroring -->
     <script src="js/script.js"></script>
-
-    <!-- fusion charts -->
-    <script src="https://static.fusioncharts.com/code/latest/fusioncharts.js"></script>
-    <!-- <script src="js/fusioncharts.js"></script> -->
-    <script src="js/fusioncharts.charts.js"></script>
-    <script src="js/words_per_min.js"></script>
-
-    <!-- Audio recording -->
-    <script src="//www.WebRTC-Experiment.com/RecordRTC.js"></script>
-
-    <script src="js/text.js"></script>
-
   </body>
 </html>
