@@ -14,29 +14,24 @@ html, body {
 video {
   display: none;
 }
-.fa-play-circle-o {
-  color: white;
-}
-.fa-stop-circle-o {
-  color: white;
-}
+
 .left {
   background: black;
   text-align: center;
   position: relative;
 }
-h1 {
+
+h1, h2 {
   color: white;
   text-align: center;
   font-family: 'Lato', sans-serif;
+}
+
+h1 {
   font-size: 5em;
   margin-bottom: 0;
-  padding-top: 20vh;
 }
-p {
-  color: white;
-  text-align: center;
-  font-family: 'Lato', sans-serif;
+h2 {
   letter-spacing: 3px;
   font-size: 2em;
 }
@@ -46,15 +41,24 @@ p {
   left: 50px;
   color: white;
 }
-h2 {
+#buttons {
+  margin: 0 auto;
   text-align: center;
-  margin-top: 70px;
-  font-size: 2em;
+  width: 50vw;
+  height:40vh;
   transition: all .2s ease-in-out;
 }
-h2:hover {
+#buttons:hover {
   transform: scale(1.2);
+  cursor: pointer;
 }
+
+#recordButton {
+  margin-top: 3vh;
+  color: white;
+  font-size: 10em;
+}
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -71,4 +75,15 @@ li a {
   text-decoration: none;
   color: white;
   padding: 20px 10px;
+}
+
+#downloadbox {
+  text-align: center;
+  height: 10vh;
+}
+
+#downloadButton {
+  color: white;
+  font-family: 'Lato', sans-serif;
+  font-size: 1.2em;
 }
