@@ -34,48 +34,59 @@ $("#recordButton").on("click", function() {
     // stream: MediaStream object
     }).then(function(stream) {
 
-      showStopButton();
+      if (isRecording == true) {
+        showStopButton();
+      }
 
       // starts recording a new stream
       let recorder = new MediaRecorder(stream);
       let data = [];
+      
+      // register event handler to add to data after each slice is recorded
+      recorder.ondataavailable = function(event) { data.push(event.data); }
 
-      /* NOTE:
-         Use a setInterval() with the MediaRecorder.requestData() function,
-         instead of mediaDevices.getUserMedia(). getUserMedia() function
-         will prompt user every time unless the user clicks "Remember this
-         decision". requestData() saves the Blob and continues recording.
+      /* Note:
+
+         We can send data to Google Cloud API by adding to recorder.ondataavilable.
+         Specifically, event.data is the new 5 second increment in a Blob, so we
+         just need to send that to Google and listen for a response. This way we
+         don't have to worry about saving multiple files.
          
-         We can use requestData() to store a Blob with URL.createObjectURL(),
-         then send this temporary file to Google Cloud API. This doesn't save
-         a file on the FS. The file exists only as long as the window is open.
-         We can release the temporary files by URL.revokeObjectURL().
       */
 
-      // if a stream is available, add the Blob to 'data' and record
-      recorder.ondataavailable = function(event) { data.push(event.data); }
       recorder.start();
-      console.log(recorder.state + " for " + (recordingTime) + " ms...");
+      start = Date.now();
 
-      // Promise resolves when stream is stopped
-      let stopped = new Promise(function(resolve, reject) {
+      var stopped = new Promise(function(resolve, reject) {
+
+        // Promise resolves when stream is stopped
         recorder.onstop = resolve;
         recorder.onerror = function(event) { reject(event.name); }
+
+        // save increments according to recordingTime
+        var recordLoop = setInterval(function() {
+
+          // makes current data available, but continues recording
+          recorder.requestData();
+
+          // stop button is pressed
+          if (isRecording == false) {
+            clearInterval(recordLoop);
+            recorder.stop();
+          }
+
+        }, recordingTime);
       });
 
-      // Promise resolves when recording time is up
-      let recorded = wait().then(
-        function() { recorder.state == "recording" && recorder.stop(); }
-      );
       
-      // Promise resolves when the stream is both stopped and time is up
-      // returns the array of Blobs
-      return Promise.all([
-        stopped,
-        recorded
-      ])
-      .then(function() { 
-          return data; 
+      // returns the array of Blobs only when recorder is stopped
+      return Promise.all([ stopped ])
+      .then(function() {
+          
+          end = Date.now();
+          console.log("Recorded " + (end - start) + " ms.");
+          return data;
+
       });
 
     // record media to file
@@ -122,3 +133,4 @@ $("#recordButton").on("click", function() {
 function updateScore() {
   console.log('updateScore is running');
 }
+
