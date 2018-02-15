@@ -8,13 +8,19 @@ $("document").ready(function() {
 
 
 function toggleMenu() {
-  if ($("#menu").hasClass("hidden")) {
+  if ($("#menu").hasClass("hidden")) { // show menu
     $("#menu").addClass("visible");
     $("#menu").removeClass("hidden");
     $("#logo").css("transform", "rotate(90deg)");
-  } else {
+  } else { // hide menu
     $("#menu").removeClass("visible");
     $("#menu").addClass("hidden");
+    $("#logo").mouseover(function() {
+      $(this).css("transform", "rotate(90deg)");
+    });
+    $("#logo").mouseout(function() {
+      $(this).css("transform", "rotate(0deg)");
+    });
     $("#logo").css("transform", "rotate(0deg)");
   }
 }
