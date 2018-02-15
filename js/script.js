@@ -2,41 +2,52 @@ const recordingTime = 5000;
 var isRecording = false;
 
 
-$("document").ready(function() {
-
-});
-
-
+// this is called when the logo is clicked
 function toggleMenu() {
-  if ($("#menu").hasClass("hidden")) { // show menu
+
+  // if menu is invisible, show it
+  if ($("#menu").hasClass("hidden")) {
+
+    // show the menu
     $("#menu").addClass("visible");
     $("#menu").removeClass("hidden");
+
+    // keep the logo sideways
     $("#logo").css("transform", "rotate(90deg)");
-  } else { // hide menu
+
+  // if menu is shown, make it disappear
+  } else {
+
+    // hide the menu
     $("#menu").removeClass("visible");
     $("#menu").addClass("hidden");
+
+    // restore functionality where hovering mouse over the logo
+    // rotates it
     $("#logo").mouseover(function() {
       $(this).css("transform", "rotate(90deg)");
     });
+
+    // restore functionality where moving mouse away from the logo
+    // rotates it back
     $("#logo").mouseout(function() {
       $(this).css("transform", "rotate(0deg)");
     });
+
+    // when mouse is not on the logo, it isn't rotated
     $("#logo").css("transform", "rotate(0deg)");
   }
 }
 
 
-function wait() {
-  return new Promise(resolve => setTimeout(resolve, recordingTime));
-}
-
-
+// replace stop button with start button
 function showStartButton() {
   $("#recordButton").addClass("fa-start-circle-o");
   $("#recordButton").removeClass("fa-stop-circle-o");
 }
 
 
+// replace start button with stop button
 function showStopButton() {
   $("#recordButton").addClass("fa-stop-circle-o");
   $("#recordButton").removeClass("fa-start-circle-o");
@@ -51,6 +62,9 @@ $("#recordButton").on("click", function() {
 
     // hide download button
     $("#downloadButton").hide();
+
+    // remove reference to previous recording to free memory
+    URL.revokeObjectURL($("#recording").attr("src"));
 
     // returns Promise that resolves to a MediaStream object
     navigator.mediaDevices.getUserMedia({
@@ -81,7 +95,10 @@ $("#recordButton").on("click", function() {
 
       recorder.start();
       start = Date.now();
+
+      // generate spectrogram
       init_analysis(stream);
+
       var stopped = new Promise(function(resolve, reject) {
 
         // Promise resolves when stream is stopped
@@ -179,17 +196,19 @@ function init_analysis(stream) {
   var frequencyData = new Uint8Array(analyser.frequencyBinCount * 0.75);
 
   // size of visualization window
-  var svgHeight = '150';
-  var svgWidth = '1000';
-  var barPadding = '0';
+  var svgHeight = '250';
+  var svgWidth = $(window).width();
+  var barPadding = '1';
 
   // create graph in #graphs div
   function createSvg(parent, height, width) {
     return d3.select(parent)
-    .append('svg')
-    .attr('height', height)
-    .attr('width', width);
+    .append("svg")
+    .attr("height", height)
+    .attr("width", width);
+
   }
+
   var graph = createSvg('#graphs', svgHeight, svgWidth);
 
   // initialize d3 chart
@@ -215,6 +234,9 @@ function init_analysis(stream) {
     // copy frequency data to frequencyData array.
     analyser.getByteFrequencyData(frequencyData);
     
+    svgWidth = $(window).width();
+    var vertical_scale = $(window).height() / 500;
+
     // update d3 chart with new data.
     graph.selectAll('rect')
         .data(frequencyData)
@@ -222,12 +244,13 @@ function init_analysis(stream) {
           return i * 2 * (svgWidth / frequencyData.length);
         })
         .attr('width', svgWidth * 2 / frequencyData.length - barPadding)
-        .attr('y', function(d) {
-          return Math.round(svgHeight - d * 0.75);
+        .attr('y', function(d, i) {
+          return svgHeight - (0.25 * vertical_scale * d * Math.log(i+1));
+          //return svgHeight - (1.25 * d);
         })
         .attr('height', function(d, i) {
           // equalizer boosts bars in high frequency since they're harder to pick up
-          return d + Math.round(i * 0.5);
+          return 2 * d;
         })
         .attr('fill', function(d, i) {
           // blue = bass, yellow = low midrange, red = upper midrange
