@@ -4,21 +4,45 @@ html, body {
   background: black;
 }
 
-#downloadButton, #recording {
+#recording {
   display: none;
 }
 
-#stopButton {
-  display: none;
+nav {
+  height: 5em;
+  display: flex;
+  align-items: center; 
 }
-video {
+
+#logo {
+  margin: 20px;
+  color: white;
+  cursor: pointer;
+}
+
+#logo:hover {
+  transform: rotate(90deg);
+  transition: all .2s ease-in-out;
+}
+
+.visible {
+  display: inline-block;
+}
+
+.hidden {
   display: none;
 }
 
-.left {
-  background: black;
-  text-align: center;
-  position: relative;
+#menu {
+  height: 2em;
+}
+
+#menu a {
+  margin-right: 10px;
+  text-align: right;
+  font-family: 'Lato', sans-serif;
+  font-size: 1.5em;
+  color: white;
 }
 
 h1, h2 {
@@ -29,23 +53,19 @@ h1, h2 {
 
 h1 {
   font-size: 5em;
-  margin-bottom: 0;
+  margin: 0;
 }
 h2 {
   letter-spacing: 3px;
   font-size: 2em;
+  margin-top: 0;
 }
-#logo {
-  position: absolute;
-  top: 30px;
-  left: 50px;
-  color: white;
-}
+
 #buttons {
   margin: 0 auto;
   text-align: center;
   width: 50vw;
-  height:40vh;
+  height:45vh;
   transition: all .2s ease-in-out;
 }
 #buttons:hover {
@@ -54,36 +74,26 @@ h2 {
 }
 
 #recordButton {
-  margin-top: 3vh;
   color: white;
   font-size: 10em;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  text-align: right;
-  margin-right: 30px;
-  font-family: 'Lato', sans-serif;
-  font-size: 1.2em;
-}
-li {
-    display: inline-block;
-    margin-top: 30px;
-}
-li a {
-  text-decoration: none;
-  color: white;
-  padding: 20px 10px;
-}
-
 #downloadbox {
+  margin: 0;
+  margin-top: 10px;
   text-align: center;
-  height: 10vh;
 }
 
 #downloadButton {
+  display: none;
   color: white;
   font-family: 'Lato', sans-serif;
   font-size: 1.2em;
+}
+
+#graphs {
+  background-color: black;
+  width: 80vw;
+  margin: 0 auto;
+  margin-bottom: 2em;
 }

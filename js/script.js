@@ -1,6 +1,25 @@
 const recordingTime = 5000;
 var isRecording = false;
 
+
+$("document").ready(function() {
+
+});
+
+
+function toggleMenu() {
+  if ($("#menu").hasClass("hidden")) {
+    $("#menu").addClass("visible");
+    $("#menu").removeClass("hidden");
+    $("#logo").css("transform", "rotate(90deg)");
+  } else {
+    $("#menu").removeClass("visible");
+    $("#menu").addClass("hidden");
+    $("#logo").css("transform", "rotate(0deg)");
+  }
+}
+
+
 function wait() {
   return new Promise(resolve => setTimeout(resolve, recordingTime));
 }
@@ -19,7 +38,6 @@ function showStopButton() {
 
 
 $("#recordButton").on("click", function() {
-  console.log(isRecording);
   
   if (isRecording == false) {
 
@@ -34,9 +52,7 @@ $("#recordButton").on("click", function() {
     // stream: MediaStream object
     }).then(function(stream) {
 
-      if (isRecording == true) {
-        showStopButton();
-      }
+      showStopButton();
 
       // starts recording a new stream
       let recorder = new MediaRecorder(stream);
@@ -51,12 +67,12 @@ $("#recordButton").on("click", function() {
          Specifically, event.data is the new 5 second increment in a Blob, so we
          just need to send that to Google and listen for a response. This way we
          don't have to worry about saving multiple files.
-         
+
       */
 
       recorder.start();
       start = Date.now();
-
+      init_analysis(stream);
       var stopped = new Promise(function(resolve, reject) {
 
         // Promise resolves when stream is stopped
@@ -84,7 +100,7 @@ $("#recordButton").on("click", function() {
       .then(function() {
           
           end = Date.now();
-          console.log("Recorded " + (end - start) + " ms.");
+          console.log("Length: " + (end - start) + " ms.");
           return data;
 
       });
@@ -95,9 +111,8 @@ $("#recordButton").on("click", function() {
 
       // combine recorded chunks into one blob
       let recordedBlob = new Blob(recordedChunks, { type: "audio/mp3" });
-      console.log(recordedBlob);
 
-      // download the recording as a webm
+      // download the recording as a mp3
       $("#recording").attr("src", URL.createObjectURL(recordedBlob));
 
       // show download button
@@ -115,7 +130,7 @@ $("#recordButton").on("click", function() {
 
     }).catch(function(err) {
 
-      console.log("User cancelled media stream.");
+      console.log("Permission not granted.");
       isRecording = false;
       showStartButton();
 
@@ -134,63 +149,93 @@ function updateScore() {
   console.log('updateScore is running');
 }
 
-/*
-function analyze() {
-  var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  var audioElement = $("#recording");
-  var audioSrc = audioCtx.createMediaElementSource(audioElement);
-  var analyzer = audioCtx.createAnalyzer();
 
-  // Bind analyzer to media element source
-  audioSrc.connect(analyzer);
+function init_analysis(stream) {
+
+  // webkit is for Safari support
+  // moz is for Firefox support
+  var audioCtx = new (window.AudioContext || 
+                      window.webkitAudioContext ||
+                      window.mozAudioContext)();
+  
+  // connect to stream
+  var audioSrc = audioCtx.createMediaStreamSource(stream);
+  var analyser = audioCtx.createAnalyser();
+
+  // bind analyzer to stream source
+  audioSrc.connect(analyser);
   audioSrc.connect(audioCtx.destination);
 
-  var frequencyData = new Uint8Array(200);
+  // split into 768 bins (ignore high frequency sound since there's not much of it)
+  var frequencyData = new Uint8Array(analyser.frequencyBinCount * 0.75);
 
-  var svgHeight = '300';
-  var svgWidth = '1200';
-  var barPadding = '1';
+  // size of visualization window
+  var svgHeight = '150';
+  var svgWidth = '1000';
+  var barPadding = '0';
 
+  // create graph in #graphs div
   function createSvg(parent, height, width) {
-    return d3.select(parent).append('svg').attr('height', height).attr('width', width);
+    return d3.select(parent)
+    .append('svg')
+    .attr('height', height)
+    .attr('width', width);
+  }
+  var graph = createSvg('#graphs', svgHeight, svgWidth);
+
+  // initialize d3 chart
+  // it attempts to select 'rect', which doesn't exist, so it creates empty array
+  // enter() creates references based on the data
+  // append() creates a 'rect' element
+  graph.selectAll('rect')
+    .data(frequencyData)
+    .enter()
+    .append('rect');
+
+  // continuously loops and updates chart with frequency data.
+  function renderChart() {
+
+    // cancel animation when stop button pressed and delete visualization
+    if (isRecording) {
+      requestAnimationFrame(renderChart);
+    } else {
+      cancelAnimationFrame(renderChart);
+      d3.select('svg').remove();
+    }
+
+    // copy frequency data to frequencyData array.
+    analyser.getByteFrequencyData(frequencyData);
+    
+    // update d3 chart with new data.
+    graph.selectAll('rect')
+        .data(frequencyData)
+        .attr('x', function (d, i) {
+          return i * 2 * (svgWidth / frequencyData.length);
+        })
+        .attr('width', svgWidth * 2 / frequencyData.length - barPadding)
+        .attr('y', function(d) {
+          return Math.round(svgHeight - d * 0.75);
+        })
+        .attr('height', function(d, i) {
+          // equalizer boosts bars in high frequency since they're harder to pick up
+          return d + Math.round(i * 0.5);
+        })
+        .attr('fill', function(d, i) {
+          // blue = bass, yellow = low midrange, red = upper midrange
+          var blue = 255 - i;
+          if (blue < 0) blue = 0;
+          var green = 255 - Math.abs(200 - i);
+          if (green < 0) green = 0;
+          var red = 255 - Math.abs(350 - i);
+          if (red < 0) red = 0;
+          return 'rgb(' + red + ', ' + green + ', ' + blue + ')';
+        });
   }
 
-  var svg = createSvg('body', svgHeight, svgWidth);
-
-  // Create our initial D3 chart.
-  svg.selectAll('rect')
-     .data(frequencyData)
-     .enter()
-     .append('rect')
-     .attr('x', function (d, i) {
-        return i * (svgWidth / frequencyData.length);
-     })
-     .attr('width', svgWidth / frequencyData.length - barPadding);
+  // renderChart() loops until stop button is pressed due to requestAnimationFrame()
+  renderChart();
+  
 }
 
 
-function renderChart() {
-  // update chart
-  requestAnimationFrame(renderChart);
 
-  //copy frequency data
-  analyzer.getByteFrequencyData(frequencyData);
-
-  // update d3 with new data
-  svg.selectAll('rect')
-    .data(frequencyData)
-    .attr('y', function(d) {
-      return svgHeight - d;
-    })
-    .attr('height', function(d) {
-      return d;
-    })
-    .attr('fill', function(d) {
-      return 'rgb(0, 0, ' + d + ')';
-    });
-}
-
-
-renderChart();
-}
-*/

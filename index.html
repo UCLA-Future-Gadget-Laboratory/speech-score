@@ -11,27 +11,30 @@
     <link rel="icon" type="image/png" href="favicon.ico">
   </head>
   <body>
+    <nav>
+      <i class="fa fa-podcast fa-3x" id="logo" onclick="toggleMenu()"></i>
+      <div id="menu" class="hidden">
+          <a href="index.html">Home</a>  |
+          <a href="about.html">About</a>  |
+          <a href="team.html">Team</a>
+      </div>
+    </nav>
+    
 
-    <ul>
-      <li><a href="about.html">About</a></li>
-      <li><a href="team.html">Team</a></li>
-    </ul>
-
-    <div class="left">
+    <div>
       <h1>Speech Score</h1>
       <h2>Improve your speaking skills.</h2>
     </div>
 
     <div id="buttons">
       <i class="fa fa-play-circle-o" id="recordButton"></i>
-      <i class="fa fa-stop-circle-o" id="stopButton"></i>
     </div>
 
     <div id="downloadbox">
       <a id="downloadButton">Download</a>
     </div>
-    <a href="index.html"><i class="fa fa-podcast fa-3x" id="logo"></i></a>
 
+    <div id="graphs"></div>
 
     <audio id="recording"></audio>
     <script src="js/script.js"></script>
