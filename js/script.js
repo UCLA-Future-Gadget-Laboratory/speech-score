@@ -43,6 +43,9 @@ $("#recordButton").on("click", function() {
 
     isRecording = true;
 
+    // hide download button
+    $("#downloadButton").hide();
+
     // returns Promise that resolves to a MediaStream object
     navigator.mediaDevices.getUserMedia({
 
